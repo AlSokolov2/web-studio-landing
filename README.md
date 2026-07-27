@@ -1,10 +1,10 @@
 # Web Studio Landing — тема WordPress
 
+[![CI](https://github.com/AlSokolov2/finance-transaction-module/actions/workflows/ci.yml/badge.svg)](https://github.com/AlSokolov2/web-studio-landing/actions/workflows/ci.yml)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-3858e9?logo=wordpress)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-8.0%2B-777bb4?logo=php)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)](https://creativecommons.org/licenses/by-nc/4.0/)
 [![WPCS](https://img.shields.io/badge/Code%20Style-WordPress%20VIP-2563eb)](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/)
-[![CI](https://github.com/AlSokolov2/web-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/AlSokolov2/web-studio/actions/workflows/ci.yml)
 
 Тема-визитка для веб-студии на чистом коде. Без конструкторов, без jQuery, без лишнего.
 
