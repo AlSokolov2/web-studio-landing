@@ -1,0 +1,16 @@
+/*
+Theme Name: Web Studio Landing
+Theme URI: https://github.com/AlSokolov2/web-studio-landing
+Author: Alekzander
+Author URI: https://github.com/AlSokolov2
+Description: Лендинг для веб-студии на чистом коде. Портфолио с категориями (CPT), секция «О студии», контакты с микроразметкой Schema.org, форма обратной связи с AJAX-отправкой и защитой от спама, мобильная навигация. Адаптивная вёрстка (mobile-first), CSS Grid и Flexbox, ванильный JS без jQuery, управление контентом через WordPress Customizer, поддержка кастомного логотипа. WPCS-совместимый код, полный перевод на русский.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 8.0
+License: CC BY-NC 4.0
+License URI: https://creativecommons.org/licenses/by-nc/4.0/
+Text Domain: web-studio-landing
+Domain Path: /languages
+Tags: portfolio, one-column, custom-logo, custom-menu, featured-images, theme-options, translation-ready
+*/

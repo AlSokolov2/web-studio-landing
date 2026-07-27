@@ -1,0 +1,28 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Playwright / test artifacts
+.playwright-mcp/
+*.log
+
+# WordPress (if core files ever land here)
+/wp-content/upgrade/
+/wp-content/uploads/
+
+# Theme screenshots (keep only screenshot.png)
+screenshot-*.png
+
+# Composer lock (theme, not a project)
+composer.lock

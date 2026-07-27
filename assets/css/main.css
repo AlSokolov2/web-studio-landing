@@ -1,0 +1,858 @@
+/*!
+ * Web Studio Theme — main.css
+ * Mobile-first, CSS Grid + Flexbox, no external dependencies.
+ *
+ * @since 1.0.0
+ * @package Web_Studio
+ */
+
+/* -----------------------------------------------------------------------------
+ * 1. Custom Properties
+ * ----------------------------------------------------------------------------- */
+:root {
+    --color-primary:      #2563eb;
+    --color-primary-dark: #1d4ed8;
+    --color-secondary:    #0f172a;
+    --color-accent:       #f59e0b;
+    --color-accent-dark:  #d97706;
+    --color-bg:           #ffffff;
+    --color-bg-alt:       #f8fafc;
+    --color-text:         #1e293b;
+    --color-text-light:   #64748b;
+    --color-border:       #e2e8f0;
+    --color-success:      #10b981;
+    --color-error:        #ef4444;
+
+    --font-primary:       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, system-ui, sans-serif;
+    --font-size-base:     1rem;
+    --line-height:        1.6;
+
+    --spacing-xs:         0.5rem;
+    --spacing-sm:         1rem;
+    --spacing-md:         2rem;
+    --spacing-lg:         3rem;
+    --spacing-xl:         5rem;
+
+    --container-max:      1200px;
+    --border-radius:      8px;
+    --transition:         0.3s ease;
+
+    --header-height:      64px;
+}
+
+/* -----------------------------------------------------------------------------
+ * 2. Minimal normalize
+ * ----------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+.header__menu,
+.contacts__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * 3. Utility classes
+ * ----------------------------------------------------------------------------- */
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+}
+
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+    background-color: var(--color-bg);
+    clip: auto !important;
+    clip-path: none;
+    display: block;
+    height: auto;
+    left: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    top: var(--spacing-sm);
+    width: auto;
+    z-index: 100000;
+}
+
+/* Skip link */
+.skip-link:focus {
+    position: absolute;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    z-index: 9999;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: var(--border-radius);
+}
+
+/* -----------------------------------------------------------------------------
+ * 4. Section shared
+ * ----------------------------------------------------------------------------- */
+.section-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-secondary);
+}
+
+.hero,
+.portfolio,
+.about,
+.contacts,
+.feedback {
+    padding: var(--spacing-xl) 0;
+}
+
+/* -----------------------------------------------------------------------------
+ * 5. Buttons
+ * ----------------------------------------------------------------------------- */
+.btn {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+    text-align: center;
+}
+
+.btn--primary {
+    background-color: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+}
+
+.btn--primary:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    color: #fff;
+}
+
+.btn--accent {
+    background-color: var(--color-accent);
+    color: var(--color-secondary);
+    border-color: var(--color-accent);
+}
+
+.btn--accent:hover {
+    background-color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+    color: var(--color-secondary);
+}
+
+/* -----------------------------------------------------------------------------
+ * 6. Header & Navigation (mobile-first)
+ * ----------------------------------------------------------------------------- */
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 100;
+    transition: top 0.15s ease;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.header__site-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+}
+
+.header__site-title:hover {
+    color: var(--color-primary);
+}
+
+.header__logo .custom-logo {
+    max-height: 40px;
+    width: auto;
+}
+
+/* Mobile: hamburger button */
+.header__toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: var(--spacing-xs);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.header__toggle-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-secondary);
+    border-radius: 2px;
+    transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Mobile: nav hidden by default */
+.header__nav {
+    display: none;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-md) var(--spacing-sm);
+}
+
+.header__nav--open {
+    display: block;
+}
+
+.header__menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.header__menu a {
+    display: block;
+    padding: var(--spacing-xs) 0;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.header__menu a:hover,
+.header__menu .current-menu-item a {
+    color: var(--color-primary);
+}
+
+/* -----------------------------------------------------------------------------
+ * 7. Hero section
+ * ----------------------------------------------------------------------------- */
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 100vh; /* fallback for browsers without svh support */
+    min-height: 100svh;
+    padding: calc(var(--header-height) + var(--spacing-xl)) 0 var(--spacing-xl);
+    background-color: var(--color-secondary);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    text-align: center;
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.9) 0%,
+        rgba(15, 23, 42, 0.7) 100%
+    );
+}
+
+.hero__inner {
+    position: relative;
+    z-index: 1;
+}
+
+.hero__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+}
+
+.hero__subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: var(--spacing-md);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * 8. Portfolio section
+ * ----------------------------------------------------------------------------- */
+.portfolio {
+    background-color: var(--color-bg);
+}
+
+.portfolio__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+.portfolio__card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.portfolio__card:hover,
+.portfolio__card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio__image {
+    display: block;
+}
+
+.portfolio__image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.portfolio__info {
+    display: block;
+    padding: var(--spacing-sm);
+    color: inherit;
+    text-decoration: none;
+}
+
+.portfolio__name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+}
+
+.portfolio__category {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+.portfolio__empty {
+    text-align: center;
+    color: var(--color-text-light);
+    padding: var(--spacing-xl) 0;
+}
+
+/* -----------------------------------------------------------------------------
+ * 9. About section
+ * ----------------------------------------------------------------------------- */
+.about {
+    background-color: var(--color-bg-alt);
+}
+
+.about__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.about__text {
+    flex: 1 1 60%;
+}
+
+.about__text > p {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+}
+
+.about__image {
+    flex: 0 0 35%;
+}
+
+.about__image img {
+    border-radius: var(--border-radius);
+}
+
+/* Features grid */
+.about__features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.about__feature {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: flex-start;
+}
+
+.about__feature-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    background: rgba(37, 99, 235, 0.1);
+    border-radius: var(--border-radius);
+}
+
+.about__feature-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+}
+
+.about__feature-desc {
+    font-size: 0.9375rem;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+/* -----------------------------------------------------------------------------
+ * 10. Contacts section
+ * ----------------------------------------------------------------------------- */
+.contacts {
+    background-color: var(--color-bg);
+}
+
+.contacts__inner {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contacts__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.contacts__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 1.0625rem;
+}
+
+.contacts__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--color-primary);
+    background: rgba(37, 99, 235, 0.08);
+    border-radius: var(--border-radius);
+}
+
+.contacts__item a {
+    color: var(--color-text);
+}
+
+.contacts__item a:hover {
+    color: var(--color-primary);
+}
+
+/* Social links */
+.contacts__social {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    justify-content: center;
+}
+
+.contacts__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.contacts__social-link:hover,
+.contacts__social-link:focus-visible {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+/* -----------------------------------------------------------------------------
+ * 11. Feedback form
+ * ----------------------------------------------------------------------------- */
+.feedback {
+    background-color: var(--color-bg-alt);
+}
+
+.feedback__desc {
+    text-align: center;
+    color: var(--color-text-light);
+    max-width: 500px;
+    margin: 0 auto var(--spacing-md);
+}
+
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+}
+
+.form__group {
+    margin-bottom: var(--spacing-sm);
+}
+
+.form__group--hidden {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.form__label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.375rem;
+    font-size: 0.9375rem;
+}
+
+.form__required {
+    color: var(--color-error);
+}
+
+.form__field {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    line-height: 1.5;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form__field:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.form__field--textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form__field[aria-invalid="true"] {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.form__error {
+    display: none;
+    font-size: 0.8125rem;
+    color: var(--color-error);
+    margin-top: 0.25rem;
+}
+
+.form__submit {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+}
+
+.form__submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form__status {
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+.form__status--success {
+    display: block;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.form__status--error {
+    display: block;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-error);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* -----------------------------------------------------------------------------
+ * 12. Footer
+ * ----------------------------------------------------------------------------- */
+.footer {
+    background: var(--color-secondary);
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: var(--spacing-md) 0;
+}
+
+.footer__copy {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * 13. Page content (index.php, page.php)
+ * ----------------------------------------------------------------------------- */
+.page-content {
+    padding: calc(var(--header-height) + var(--spacing-xl)) 0 var(--spacing-xl);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-content__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: var(--spacing-md);
+}
+
+/* -----------------------------------------------------------------------------
+ * 14. 404 page
+ * ----------------------------------------------------------------------------- */
+.not-found {
+    text-align: center;
+    padding: calc(var(--header-height) + var(--spacing-xl)) 0 var(--spacing-xl);
+}
+
+.not-found__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--spacing-sm);
+}
+
+.not-found__text {
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-md);
+}
+
+/* -----------------------------------------------------------------------------
+ * 15. Scroll animations (Intersection Observer)
+ * ----------------------------------------------------------------------------- */
+.animate {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* -----------------------------------------------------------------------------
+ * 16. Focus styles (accessibility)
+ * ----------------------------------------------------------------------------- */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * 17. Admin bar offset
+ * ----------------------------------------------------------------------------- */
+/*
+ * WordPress core already handles the initial content offset:
+ * - Desktop (≥ 783px): html { margin-top: 32px }, admin bar is position: fixed.
+ * - Mobile (< 783px): html { margin-top: 46px }, admin bar is position: absolute.
+ *
+ * All we need: override the header's sticky top value so it sticks
+ * just below the fixed admin bar on desktop. On mobile, the admin bar
+ * is absolute (scrolls away with the page), so top: 0 is correct —
+ * the header scrolls with the page alongside the admin bar and sticks
+ * to the viewport top once the admin bar is gone.
+ */
+@media screen and (min-width: 783px) {
+    .admin-bar .header {
+        top: 32px;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ * 18. Media Queries
+ * ----------------------------------------------------------------------------- */
+
+/* ≥ 576px — Small tablets, landscape phones */
+@media (min-width: 576px) {
+    .form__row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .about__features {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .portfolio__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ≥ 768px — Tablets, small laptops */
+@media (min-width: 768px) {
+    .container {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+
+    /* Desktop navigation */
+    .header__toggle {
+        display: none;
+    }
+
+    .header__nav {
+        display: block;
+        position: static;
+        background: none;
+        backdrop-filter: none;
+        border: none;
+        padding: 0;
+    }
+
+    .header__menu {
+        flex-direction: row;
+        gap: var(--spacing-md);
+    }
+
+    /* About: side by side */
+    .about__inner {
+        flex-direction: row;
+    }
+
+    .about__features {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form__submit {
+        width: auto;
+    }
+}
+
+/* ≥ 992px — Desktops */
+@media (min-width: 992px) {
+    .portfolio__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .about__features {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ≥ 1200px — Large desktops */
+@media (min-width: 1200px) {
+    :root {
+        --font-size-base: 1.0625rem;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+ * 19. Reduced motion (accessibility)
+ * ----------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

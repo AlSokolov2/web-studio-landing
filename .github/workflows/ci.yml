@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+    tags: ['*']
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # PHP Lint & Code Style
+  # ---------------------------------------------------------------------------
+  lint:
+    name: PHP Lint & WPCS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: PHP Syntax check
+        run: find . -name '*.php' -not -path './vendor/*' -exec php -l {} \; | grep -v 'No syntax errors'
+
+      - name: PHPCS
+        run: ./vendor/bin/phpcs --standard=phpcs.xml --report=full .
+
+  # ---------------------------------------------------------------------------
+  # Release — triggered on tag push
+  # ---------------------------------------------------------------------------
+  release:
+    name: Create Release
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get tag version
+        id: tag
+        run: echo "version=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+
+      - name: Create theme archive
+        run: |
+          mkdir -p dist
+          git archive --format=zip --prefix=web-studio-landing/ -o dist/web-studio-landing.zip HEAD
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.tag.outputs.version }}
+          files: dist/web-studio-landing.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

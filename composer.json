@@ -1,0 +1,15 @@
+{
+    "name": "alsokolov2/web-studio",
+    "type": "wordpress-theme",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.10",
+        "wp-coding-standards/wpcs": "^3.4",
+        "phpcsstandards/phpcsutils": "*",
+        "dealerdirect/phpcodesniffer-composer-installer": "*"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
